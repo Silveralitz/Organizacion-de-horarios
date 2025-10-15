@@ -3,24 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Calendario (Mes/Año) — Organizador de Eventos</title>
+  <title>Calendario — Organizador de Eventos</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
-    <h1>Calendario</h1>
+    <div class="brand">
+      <h1>Calendario</h1>
+      <p class="tagline">Dale vida a tus días ✨</p>
+    </div>
+
     <div class="controls">
-      <button id="todayBtn">Hoy</button>
-      <button id="prevBtn" title="Mes anterior">◀</button>
-      <button id="nextBtn" title="Mes siguiente">▶</button>
+      <button id="todayBtn" class="btn subtle">Hoy</button>
+      <button id="prevBtn" class="btn circle" title="Mes anterior">◀</button>
+      <button id="nextBtn" class="btn circle" title="Mes siguiente">▶</button>
 
       <select id="monthSelect" aria-label="Seleccionar mes"></select>
       <select id="yearSelect" aria-label="Seleccionar año"></select>
 
-      <button id="btnAddEvent">Añadir evento</button>
-      <button id="btnExport">Exportar JSON</button>
-      <button id="btnImport">Importar JSON</button>
-      <button id="btnClear">Borrar todo</button>
+      <button id="btnAddEvent" class="btn primary">+ Evento</button>
+      <button id="btnExport" class="btn">Exportar</button>
+      <button id="btnImport" class="btn">Importar</button>
+      <button id="btnClear" class="btn danger">Borrar</button>
     </div>
   </header>
 
@@ -43,7 +47,7 @@
 
       <label>
         Título
-        <input type="text" name="title" required />
+        <input type="text" name="title" required placeholder="Ej. Reunión con equipo" />
       </label>
 
       <label>
@@ -51,30 +55,42 @@
         <input type="date" name="date" required />
       </label>
 
-      <label class="inline">
-        Hora inicio
-        <input type="time" name="start" />
-      </label>
+      <div class="inline-row">
+        <label class="inline">
+          Hora inicio
+          <input type="time" name="start" />
+        </label>
 
-      <label class="inline">
-        Hora fin
-        <input type="time" name="end" />
+        <label class="inline">
+          Hora fin
+          <input type="time" name="end" />
+        </label>
+      </div>
+
+      <label class="emoji-label">
+        Icono (emoji)
+        <input type="text" name="emoji" maxlength="3" placeholder="😊" />
+        <div class="emoji-suggestions" id="emojiSuggestions">
+          <!-- botones generados por JS -->
+        </div>
       </label>
 
       <label>
-        Color
-        <input type="color" name="color" value="#3AA0FF" />
+        Color / Estilo
+        <div class="palette" id="palette">
+          <!-- botones generados por JS -->
+        </div>
       </label>
 
       <label>
         Descripción
-        <textarea name="description" rows="3"></textarea>
+        <textarea name="description" rows="3" placeholder="Notas, lugar, link..."></textarea>
       </label>
 
       <div class="modal-actions">
-        <button type="submit" id="saveBtn">Guardar</button>
-        <button type="button" id="deleteBtn" class="danger hidden">Eliminar</button>
-        <button type="button" id="cancelBtn">Cancelar</button>
+        <button type="submit" id="saveBtn" class="btn primary">Guardar</button>
+        <button type="button" id="deleteBtn" class="btn danger hidden">Eliminar</button>
+        <button type="button" id="cancelBtn" class="btn subtle">Cancelar</button>
       </div>
 
       <input type="hidden" name="id" />
@@ -83,6 +99,9 @@
 
   <input type="file" id="importFile" accept="application/json" class="hidden" />
 
-  <script src="script.js"></script>
+  <!-- contenedor para confetti temporal -->
+  <div id="confetti-root" class="confetti-root" aria-hidden="true"></div>
+
+  <script src="app.js"></script>
 </body>
 </html>
