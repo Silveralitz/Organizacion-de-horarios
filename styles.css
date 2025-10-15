@@ -1,0 +1,152 @@
+:root{
+  --bg:#f6f8fb;
+  --panel:#ffffff;
+  --accent:#3AA0FF;
+  --muted:#6b7280;
+  --card-border:#e6e9ee;
+  --text:#0f1724;
+  --hour-height:48px;
+}
+
+*{box-sizing:border-box;font-family:Inter, Roboto, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial;}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 16px;
+  background:var(--panel);
+  border-bottom:1px solid var(--card-border);
+}
+.topbar h1{margin:0;font-size:1.1rem}
+.controls{display:flex;gap:8px;align-items:center}
+.controls button, .controls select{
+  padding:8px 10px;border-radius:6px;border:1px solid var(--card-border);
+  background:white;cursor:pointer;
+}
+.controls button:hover{opacity:0.95}
+
+.container{display:flex;gap:16px;padding:16px;align-items:flex-start;min-height:calc(100vh - 76px)}
+.calendar-shell{
+  flex:1;
+  background:transparent;
+  min-width:300px;
+}
+.weekdays{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+  margin-bottom:8px;
+}
+.weekdays .wd{
+  text-align:center;
+  font-weight:600;
+  color:var(--muted);
+  padding:8px 6px;
+}
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:8px;
+  align-items:start;
+}
+
+/* Cada celda de día */
+.day{
+  background:var(--panel);
+  border:1px solid var(--card-border);
+  border-radius:8px;
+  min-height:90px;
+  padding:8px;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+}
+.day.other-month{opacity:0.45}
+.day .day-num{
+  font-weight:700;
+  margin-bottom:6px;
+}
+.day .events {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.event-pill{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:6px 8px;
+  border-radius:999px;
+  color:var(--panel);
+  font-size:12px;
+  box-shadow:0 6px 10px rgba(2,6,23,0.06);
+  cursor:pointer;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* indicador de número de eventos cuando hay muchos */
+.event-count{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+/* Panel lateral */
+.day-panel{
+  width:320px;
+  background:var(--panel);
+  border:1px solid var(--card-border);
+  padding:12px;
+  border-radius:8px;
+  height:fit-content;
+}
+.day-panel h2{margin-top:0}
+.events-list{display:flex;flex-direction:column;gap:10px}
+.event-card{
+  border-radius:8px;
+  padding:8px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.02));
+  display:flex;flex-direction:column;gap:6px;
+}
+.event-meta{font-size:13px;color:var(--muted)}
+.event-actions{display:flex;gap:8px;justify-content:flex-end}
+
+/* modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.35);z-index:60}
+.hidden{display:none}
+.modal-content{
+  width:420px;
+  background:var(--panel);
+  padding:16px;
+  border-radius:8px;
+  box-shadow:0 10px 40px rgba(2,6,23,0.2);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.modal-content label{display:flex;flex-direction:column;gap:6px;font-size:13px}
+.modal-content input[type="text"],
+.modal-content input[type="date"],
+.modal-content input[type="time"],
+.modal-content textarea,
+.modal-content select,
+.modal-content input[type="color"]{
+  padding:8px;border-radius:6px;border:1px solid var(--card-border);background:white;
+}
+.modal-content .inline{display:flex;gap:8px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+.modal-actions .danger{background:#ef4444;color:white;border:none;padding:8px 10px;border-radius:6px}
+#saveBtn{background:var(--accent);color:white;border:none;padding:8px 10px;border-radius:6px}
+#cancelBtn{background:transparent;border:1px solid var(--card-border);padding:8px 10px;border-radius:6px}
+
+/* responsive */
+@media (max-width:900px){
+  .container{flex-direction:column;padding:12px}
+  .day-panel{width:100%}
+  .calendar-grid{gap:6px}
+}

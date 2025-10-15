@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calendario (Mes/Año) — Organizador de Eventos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Calendario</h1>
+    <div class="controls">
+      <button id="todayBtn">Hoy</button>
+      <button id="prevBtn" title="Mes anterior">◀</button>
+      <button id="nextBtn" title="Mes siguiente">▶</button>
+
+      <select id="monthSelect" aria-label="Seleccionar mes"></select>
+      <select id="yearSelect" aria-label="Seleccionar año"></select>
+
+      <button id="btnAddEvent">Añadir evento</button>
+      <button id="btnExport">Exportar JSON</button>
+      <button id="btnImport">Importar JSON</button>
+      <button id="btnClear">Borrar todo</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="calendar-shell">
+      <div class="weekdays" id="weekdays"></div>
+      <div class="calendar-grid" id="calendarGrid" role="grid" aria-label="Calendario mensual"></div>
+    </section>
+
+    <aside class="day-panel" id="dayPanel" aria-live="polite">
+      <h2 id="selectedDateTitle">Selecciona un día</h2>
+      <div id="eventsList" class="events-list">No hay eventos seleccionados.</div>
+    </aside>
+  </main>
+
+  <!-- Modal: Añadir / Editar evento -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <form id="eventForm" class="modal-content">
+      <h2 id="modalTitle">Añadir evento</h2>
+
+      <label>
+        Título
+        <input type="text" name="title" required />
+      </label>
+
+      <label>
+        Fecha
+        <input type="date" name="date" required />
+      </label>
+
+      <label class="inline">
+        Hora inicio
+        <input type="time" name="start" />
+      </label>
+
+      <label class="inline">
+        Hora fin
+        <input type="time" name="end" />
+      </label>
+
+      <label>
+        Color
+        <input type="color" name="color" value="#3AA0FF" />
+      </label>
+
+      <label>
+        Descripción
+        <textarea name="description" rows="3"></textarea>
+      </label>
+
+      <div class="modal-actions">
+        <button type="submit" id="saveBtn">Guardar</button>
+        <button type="button" id="deleteBtn" class="danger hidden">Eliminar</button>
+        <button type="button" id="cancelBtn">Cancelar</button>
+      </div>
+
+      <input type="hidden" name="id" />
+    </form>
+  </div>
+
+  <input type="file" id="importFile" accept="application/json" class="hidden" />
+
+  <script src="script.js"></script>
+</body>
+</html>
